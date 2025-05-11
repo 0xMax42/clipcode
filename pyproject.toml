@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "clipcode"
-version = "0.1.1"
+version = "0.1.2"
 description = "Kompaktes CLI-Tool zur Extraktion von Quellcodedateien in Markdown-kompatibler Struktur für GPT-Prompts. Exportiert rekursiv Codeblöcke ins Clipboard – ideal für ChatGPT-Analysen."
 authors = ["Max P. <Mail@0xMax42.io>"]
 readme = "README.md"
@@ -10,7 +10,7 @@ packages = [{ include = "clipcode", from = "src" }]
 python = ">=3.12"
 
 [tool.poetry.scripts]
-repocat = "clipcode.__main__:main"
+clipcode = "clipcode.__main__:main"
 
 [build-system]
 requires = ["poetry-core>=2.0.0"]
