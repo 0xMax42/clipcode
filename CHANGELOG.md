@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.2](https://git.0xmax42.io/maxp/clipcode/compare/v0.1.1..v0.1.2) - 2025-05-11
+
+### ⚙️ Miscellaneous Tasks
+
+- *(pyproject)* Bump version and update script alias - ([96a6521](https://git.0xmax42.io/maxp/clipcode/commit/96a6521e083af4fa3a875f67f6d4a014e8066bbe))
+
 ## [0.1.1] - 2025-05-11
 
 ### 🚀 Features
