@@ -18,3 +18,11 @@ def read_file_content(path: str) -> str:
             return file.read()
     except Exception as e:
         return f"[Fehler beim Lesen der Datei: {e}]"
+
+def find_all_files(root_path: str) -> list[str]:
+    """Findet alle Dateien rekursiv ab dem angegebenen Wurzelverzeichnis."""
+    matches = []
+    for dirpath, _, filenames in os.walk(root_path):
+        for filename in filenames:
+            matches.append(os.path.join(dirpath, filename))
+    return matches
