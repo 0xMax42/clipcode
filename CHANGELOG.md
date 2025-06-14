@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.0](https://git.0xmax42.io/maxp/clipcode/compare/v0.1.2..v0.2.0) - 2025-06-14
+
+### 🚀 Features
+
+- *(exporter)* Support exporting all files if no extensions provided - ([052b6e5](https://git.0xmax42.io/maxp/clipcode/commit/052b6e5af8fd30621f82e7475ee56d8dbfcd0821))
+- *(file_utils)* Add recursive file discovery function - ([b9f7232](https://git.0xmax42.io/maxp/clipcode/commit/b9f723299c2c0f068dcdbda0949452a05fea8cc6))
+
+### 🐛 Bug Fixes
+
+- *(cli)* Handle empty extensions list in argument parsing - ([6bce171](https://git.0xmax42.io/maxp/clipcode/commit/6bce1711ec942008ed9a61e85b847c9fe3e362cf))
+
 ## [0.1.2](https://git.0xmax42.io/maxp/clipcode/compare/v0.1.1..v0.1.2) - 2025-05-11
 
 ### ⚙️ Miscellaneous Tasks
