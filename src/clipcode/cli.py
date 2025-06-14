@@ -8,9 +8,10 @@ def main():
     parser.add_argument("path", help="Pfad zum Wurzelverzeichnis (z. B. ./src)")
     parser.add_argument(
         "extensions",
-        nargs="+",
-        help="Liste von Dateiendungen ohne Punkt (z. B. py ts sh)"
+        nargs="*",
+        help="Liste von Dateiendungen ohne Punkt (z. B. py ts sh). Wenn leer, werden alle Dateien berücksichtigt."
     )
 
     args = parser.parse_args()
-    export_files_to_clipboard(args.path, args.extensions)
+    extensions = args.extensions if args.extensions else None
+    export_files_to_clipboard(args.path, extensions)
