@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [unreleased]
+
+### ⚙️ Miscellaneous Tasks
+
+- *(workflows)* Improve git-cliff installation and tagging - ([388a668](https://git.0xmax42.io/maxp/clipcode/commit/388a66871d826fca2b36ad2b3382d3a3d346a042))
+
 ## [0.2.0](https://git.0xmax42.io/maxp/clipcode/compare/v0.1.2..v0.2.0) - 2025-06-14
 
 ### 🚀 Features
