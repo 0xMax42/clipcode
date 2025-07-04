@@ -2,13 +2,22 @@ import subprocess
 import os
 from clipcode.file_utils import find_files_with_extensions, read_file_content, find_all_files
 from clipcode.syntax import get_syntax_highlight_tag
+from clipcode.gitignore_utils import filter_files_by_gitignore
 
-def export_files_to_clipboard(root_path: str, extensions: list[str] | None):
+def export_files_to_clipboard(root_path: str, extensions: list[str] | None, respect_gitignore: bool = True):
     if extensions is None:
         # Wenn extensions None ist, alle Dateien finden
         files = find_all_files(root_path)
     else:
         files = find_files_with_extensions(root_path, extensions)
+
+    # Immer .git-Ordner und .gitignore-Dateien ausschließen
+    from pathlib import Path
+    files = [f for f in files if '.git' not in Path(f).parts and Path(f).name != '.gitignore']
+
+    # Gitignore-Filterung anwenden, falls aktiviert
+    if respect_gitignore:
+        files = filter_files_by_gitignore(files, root_path)
 
     output = []
     output.append("## Projektdateien\n")
