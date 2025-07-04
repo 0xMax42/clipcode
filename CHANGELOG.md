@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.4.0](https://git.0xmax42.io/maxp/clipcode/compare/v0.3.0..v0.4.0) - 2025-07-04
+
+### 🚀 Features
+
+- *(cli)* Add gitignore support and configuration options - ([b3501b9](https://git.0xmax42.io/maxp/clipcode/commit/b3501b9a13046008a8c21d6217ecaa60546d76ab))
+
 ## [0.3.0](https://git.0xmax42.io/maxp/clipcode/compare/v0.2.0..v0.3.0) - 2025-06-20
 
 ### ⚙️ Miscellaneous Tasks
