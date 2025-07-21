@@ -15,6 +15,7 @@ Es exportiert rekursiv Dateien mit bestimmten Endungen und kopiert sie als saube
 * 🚫 **Intelligente .gitignore-Unterstützung** – respektiert automatisch .gitignore-Dateien
 * 🔒 **Automatischer .git-Ausschluss** – .git-Ordner werden immer ausgeschlossen
 * ⚙️ **Konfigurierbar** – gitignore-Respekt kann deaktiviert werden
+* 🚫 **Explizite Ausschlussmuster** – mit `-i/--ignore` können Dateien oder Globs gezielt ausgeschlossen werden
 
 ---
 
@@ -67,6 +68,22 @@ clipcode --respect-gitignore ./src py ts
 
 # .gitignore ignorieren (nur .git-Ordner wird ausgeschlossen)
 clipcode --no-respect-gitignore ./src py ts
+```
+
+### Explizite Ignore-Patterns
+
+Mit `-i` / `--ignore` lassen sich Pfad- oder Glob-Muster angeben, die **vor allen anderen Regeln** ausgeschlossen werden.  
+Das Flag kann mehrfach verwendet oder als kommaseparierte Liste übergeben werden.
+
+```bash
+# Zwei Pattern in einer Kommasequenz
+clipcode -i "*.log,*.tmp" ./src
+
+# Mehrfaches Flag
+clipcode -i secret.py -i "tests/*" ./src
+
+# In Kombination mit ausgeschaltetem .gitignore-Respekt
+clipcode -i "*.log" --no-respect-gitignore ./src
 ```
 
 ### Ergebnis (im Clipboard):

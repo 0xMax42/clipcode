@@ -41,7 +41,7 @@ class TestCLI(unittest.TestCase):
             main()
         
         # Verify export_files_to_clipboard was called with correct arguments
-        mock_export.assert_called_once_with(str(self.temp_path), None, True)
+        mock_export.assert_called_once_with(str(self.temp_path), None, True, [])
     
     @patch('clipcode.cli.export_files_to_clipboard')
     def test_cli_with_extensions(self, mock_export):
@@ -52,7 +52,7 @@ class TestCLI(unittest.TestCase):
             main()
         
         # Verify export_files_to_clipboard was called with extensions
-        mock_export.assert_called_once_with(str(self.temp_path), ['py', 'js', 'ts'], True)
+        mock_export.assert_called_once_with(str(self.temp_path), ['py', 'js', 'ts'], True, [])
     
     @patch('clipcode.cli.export_files_to_clipboard')
     def test_cli_respect_gitignore_default(self, mock_export):
@@ -63,7 +63,7 @@ class TestCLI(unittest.TestCase):
             main()
         
         # Third argument should be True (respect_gitignore=True)
-        mock_export.assert_called_once_with(str(self.temp_path), None, True)
+        mock_export.assert_called_once_with(str(self.temp_path), None, True, [])
     
     @patch('clipcode.cli.export_files_to_clipboard')
     def test_cli_explicit_respect_gitignore(self, mock_export):
@@ -73,7 +73,7 @@ class TestCLI(unittest.TestCase):
         with patch.object(sys, 'argv', test_args):
             main()
         
-        mock_export.assert_called_once_with(str(self.temp_path), None, True)
+        mock_export.assert_called_once_with(str(self.temp_path), None, True, [])
     
     @patch('clipcode.cli.export_files_to_clipboard')
     def test_cli_no_respect_gitignore(self, mock_export):
@@ -84,7 +84,7 @@ class TestCLI(unittest.TestCase):
             main()
         
         # Third argument should be False (respect_gitignore=False)
-        mock_export.assert_called_once_with(str(self.temp_path), None, False)
+        mock_export.assert_called_once_with(str(self.temp_path), None, False, [])
     
     @patch('clipcode.cli.export_files_to_clipboard')
     def test_cli_complex_combination(self, mock_export):
@@ -94,7 +94,7 @@ class TestCLI(unittest.TestCase):
         with patch.object(sys, 'argv', test_args):
             main()
         
-        mock_export.assert_called_once_with(str(self.temp_path), ['py', 'md'], False)
+        mock_export.assert_called_once_with(str(self.temp_path), ['py', 'md'], False, [])
     
     def test_cli_help_message(self):
         """Test that help message includes gitignore options."""
@@ -107,6 +107,19 @@ class TestCLI(unittest.TestCase):
         
         # Check that help was called (SystemExit with code 0)
         # This test mainly ensures the argument parser is set up correctly
+
+
+    @patch('clipcode.cli.export_files_to_clipboard')
+    def test_cli_with_ignore_patterns(self, mock_export):
+        """Test CLI with explicit ignore patterns."""
+        test_args = ['clipcode', '-i', 'foo.py,bar/baz.txt', '-i', '*.log', str(self.temp_path)]
+        
+        with patch.object(sys, 'argv', test_args):
+            main()
+        
+        mock_export.assert_called_once_with(
+            str(self.temp_path), None, True, ['foo.py', 'bar/baz.txt', '*.log']
+        )
 
 
 class TestCLIIntegration(unittest.TestCase):

@@ -12,6 +12,15 @@ def main():
         help="Liste von Dateiendungen ohne Punkt (z. B. py ts sh). Wenn leer, werden alle Dateien berücksichtigt."
     )
     
+    # Explizite Ignore-Patterns
+    parser.add_argument(
+        "-i", "--ignore",
+        action="append",
+        default=[],
+        metavar="PATTERN",
+        help="Pfad- oder Glob-Muster explizit ignorieren (mehrfach verwendbar oder als Kommaliste)."
+    )
+
     # Gitignore-Optionen
     gitignore_group = parser.add_mutually_exclusive_group()
     gitignore_group.add_argument(
@@ -29,4 +38,10 @@ def main():
     args = parser.parse_args()
     extensions = args.extensions if args.extensions else None
     respect_gitignore = not args.no_respect_gitignore
-    export_files_to_clipboard(args.path, extensions, respect_gitignore)
+
+    # Alle Ignore-Argumente in eine Liste von Mustern umwandeln
+    ignore_patterns: list[str] = []
+    for item in args.ignore:
+        ignore_patterns.extend([p.strip() for p in item.split(",") if p.strip()])
+
+    export_files_to_clipboard(args.path, extensions, respect_gitignore, ignore_patterns)
