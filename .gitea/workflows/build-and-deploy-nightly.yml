@@ -6,7 +6,7 @@ on:
     branches:
       - main
     paths-ignore:
-      - 'CHANGELOG.md'
+      - "CHANGELOG.md"
 
 jobs:
   build-and-publish:
@@ -19,7 +19,7 @@ jobs:
       - name: 🐍 Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: "3.11"
 
       - name: 🔄 Restore cache
         uses: https://git.0xmax42.io/actions/cache@v1
