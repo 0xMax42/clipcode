@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.5.0](https://git.0xmax42.io/maxp/clipcode/compare/v0.4.0..v0.5.0) - 2025-07-21
+
+### 🚀 Features
+
+- *(cli)* Add explicit ignore pattern support - ([d30fa63](https://git.0xmax42.io/maxp/clipcode/commit/d30fa63675a12f33c88f4c88e78590ab7183b0f9))
+
 ## [0.4.0](https://git.0xmax42.io/maxp/clipcode/compare/v0.3.0..v0.4.0) - 2025-07-04
 
 ### 🚀 Features
