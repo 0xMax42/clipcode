@@ -1,0 +1,51 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - "CHANGELOG.md"
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: 🔄 Restore cache
+        uses: https://git.0xmax42.io/actions/cache@v1
+        with:
+          key: poetry-v1-${{ runner.os }}-${{ hashFiles('poetry.lock') }}
+          paths: |
+            ~/.cache/pypoetry
+            ~/.cache/pip
+
+      - name: Install Poetry
+        run: |
+          pip install poetry
+
+      - name: Install Project Dependencies
+        working-directory: .
+        run: |
+          poetry install --with dev
+
+      - name: Run Tests
+        working-directory: .
+        run: |
+          poetry run pytest -q
+
+      - name: Run Tests with Coverage
+        working-directory: .
+        run: |
+          poetry run pytest --cov=src/clipcode --cov-report=term
