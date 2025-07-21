@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+## [unreleased]
+
+### 🚀 Features
+
+- *(ci)* Add GitHub Actions workflow for continuous integration - ([a80a7de](https://git.0xmax42.io/maxp/clipcode/commit/a80a7dea3ee398fdee2a4e6af09356e22764c432))
+
+### 🚜 Refactor
+
+- *(workflows)* Simplify release workflow with auto-changelog - ([b328ab6](https://git.0xmax42.io/maxp/clipcode/commit/b328ab669f38d8143655ce19209a70dd74523ae0))
+
+### 📚 Documentation
+
+- *(readme)* Remove author section - ([c38af8b](https://git.0xmax42.io/maxp/clipcode/commit/c38af8ba05138f4177188718dfab65b7ff2f5159))
+
+### ⚙️ Miscellaneous Tasks
+
+- *(workflows)* Update Python version and add release sync - ([5c23489](https://git.0xmax42.io/maxp/clipcode/commit/5c234896b83b3dac19ca38fdfe36510b00cd01e0))
+
 ## [0.5.0](https://git.0xmax42.io/maxp/clipcode/compare/v0.4.0..v0.5.0) - 2025-07-21
 
 ### 🚀 Features
