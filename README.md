@@ -165,9 +165,3 @@ clipcode/
 ## ✍️ Lizenz
 
 MIT License — siehe [LICENSE](./LICENSE)
-
----
-
-## 📊 Autor
-
-**Max P.** • [0xMax42.io](https://0xmax42.io)
