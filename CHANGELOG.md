@@ -18,6 +18,7 @@ All notable changes to this project will be documented in this file.
 
 ### ⚙️ Miscellaneous Tasks
 
+- *(ci)* Update runner image to ubuntu-latest - ([55e9722](https://git.0xmax42.io/maxp/clipcode/commit/55e97225cfc4a8170dff9dcaad3118f7ac5fe8e2))
 - Configure Renovate - ([7c32b84](https://git.0xmax42.io/maxp/clipcode/commit/7c32b8480a0158ff908298046a91033055044f76))
 - *(workflows)* Update Python version and add release sync - ([5c23489](https://git.0xmax42.io/maxp/clipcode/commit/5c234896b83b3dac19ca38fdfe36510b00cd01e0))
 
