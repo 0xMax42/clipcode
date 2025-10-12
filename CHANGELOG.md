@@ -8,6 +8,10 @@ All notable changes to this project will be documented in this file.
 
 - *(ci)* Add GitHub Actions workflow for continuous integration - ([a80a7de](https://git.0xmax42.io/maxp/clipcode/commit/a80a7dea3ee398fdee2a4e6af09356e22764c432))
 
+### 🐛 Bug Fixes
+
+- *(workflows)* Use ubuntu-python runner for ci and build jobs - ([923d73d](https://git.0xmax42.io/maxp/clipcode/commit/923d73d566fd85d465731d3b080534dd8f602236))
+
 ### 🚜 Refactor
 
 - *(workflows)* Simplify release workflow with auto-changelog - ([b328ab6](https://git.0xmax42.io/maxp/clipcode/commit/b328ab669f38d8143655ce19209a70dd74523ae0))
