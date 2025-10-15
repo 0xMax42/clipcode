@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [unreleased]
+## [0.5.1](https://git.0xmax42.io/maxp/clipcode/compare/v0.5.0..v0.5.1) - 2025-10-15
 
 ### 🚀 Features
 
@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 
 ### 🐛 Bug Fixes
 
+- *(gitignore_utils)* Normalize paths for consistent .gitignore filtering - ([dd18295](https://git.0xmax42.io/maxp/clipcode/commit/dd18295f6ac21c5c423b9bacfaa8da4e5b15ddf2))
 - *(workflows)* Use ubuntu-python runner for ci and build jobs - ([923d73d](https://git.0xmax42.io/maxp/clipcode/commit/923d73d566fd85d465731d3b080534dd8f602236))
 
 ### 🚜 Refactor
