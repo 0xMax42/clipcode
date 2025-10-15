@@ -163,26 +163,29 @@ def should_ignore_file(file_path: str, gitignore_files: List[str]) -> bool:
 
 def filter_files_by_gitignore(files: List[str], root_path: str) -> List[str]:
     """Filtert eine Liste von Dateien basierend auf .gitignore-Regeln."""
-    gitignore_files = find_gitignore_files(root_path)
-    
-    filtered_files = []
+    # Normalisiere Root- und Dateipfade auf absolute Pfade, damit das Matching konsistent ist
+    abs_root = Path(root_path).resolve()
+    gitignore_files = find_gitignore_files(str(abs_root))
+
+    filtered_files: List[str] = []
     for file_path in files:
-        file_path_obj = Path(file_path)
-        
+        p = Path(file_path)
+        abs_file = p if p.is_absolute() else (abs_root / p).resolve()
+
         # Immer .git-Ordner ausschließen
-        if '.git' in file_path_obj.parts:
+        if '.git' in abs_file.parts:
             continue
-            
+
         # .gitignore-Dateien selbst ausschließen
-        if file_path_obj.name == '.gitignore':
+        if abs_file.name == '.gitignore':
             continue
-        
+
         # Gitignore-Regeln anwenden, falls vorhanden
         if gitignore_files:
-            if not should_ignore_file(file_path, gitignore_files):
-                filtered_files.append(file_path)
+            if not should_ignore_file(str(abs_file), gitignore_files):
+                filtered_files.append(str(abs_file))
         else:
             # Keine .gitignore-Dateien vorhanden, Datei einschließen
-            filtered_files.append(file_path)
-    
+            filtered_files.append(str(abs_file))
+
     return filtered_files
