@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [unreleased]
+## [0.6.0](https://git.0xmax42.io/maxp/clipcode/compare/v0.5.1..v0.6.0) - 2026-01-10
 
 ### 🚀 Features
 
