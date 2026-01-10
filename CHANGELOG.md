@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [unreleased]
+
+### 🚀 Features
+
+- *(exporter)* Skip binary and svg files on export - ([e080833](https://git.0xmax42.io/maxp/clipcode/commit/e080833c807682a82a9084540c7f43f707756bb0))
+
 ## [0.5.1](https://git.0xmax42.io/maxp/clipcode/compare/v0.5.0..v0.5.1) - 2025-10-15
 
 ### 🚀 Features
