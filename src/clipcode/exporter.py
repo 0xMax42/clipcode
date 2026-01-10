@@ -6,6 +6,31 @@ from clipcode.gitignore_utils import filter_files_by_gitignore
 import fnmatch
 from pathlib import Path
 
+
+def _should_skip_file_for_export(file_path: str) -> bool:
+    # Skip SVG explicitly (even though it's text, it can be large/noisy for clipboard exports)
+    if Path(file_path).suffix.lower() == ".svg":
+        return True
+
+    try:
+        with open(file_path, "rb") as f:
+            chunk = f.read(4096)
+    except OSError:
+        # If we can't read it, treat it as non-exportable for safety.
+        return True
+
+    if not chunk:
+        return False
+
+    # Fast binary indicator
+    if b"\x00" in chunk:
+        return True
+
+    # Heuristic: count non-text bytes
+    text_bytes = set(b"\t\n\r\f\b") | set(range(0x20, 0x7F))
+    non_text = sum(byte not in text_bytes for byte in chunk)
+    return (non_text / len(chunk)) > 0.30
+
 def export_files_to_clipboard(
     root_path: str,
     extensions: list[str] | None,
@@ -39,6 +64,8 @@ def export_files_to_clipboard(
     output.append("## Projektdateien\n")
 
     for file_path in files:
+        if _should_skip_file_for_export(file_path):
+            continue
         content = read_file_content(file_path)
         lang = get_syntax_highlight_tag(file_path)
         output.append(f"### {file_path}\n```{lang}\n{content}\n```\n---\n")
