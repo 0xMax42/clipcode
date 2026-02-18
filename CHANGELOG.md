@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### ⚙️ Miscellaneous Tasks
 
+- *(ci)* Add concurrency control for pull request workflow - ([ba9207f](https://git.0xmax42.io/maxp/clipcode/commit/ba9207fa4f943a5b01bbf614b7456ef094e4b18e))
 - *(ci)* Simplify release and ci workflows and remove helper scripts - ([08ca2e5](https://git.0xmax42.io/maxp/clipcode/commit/08ca2e52e2c936c2dd1fcb2e79707f98d986d1f2))
 - *(renovate)* Switch configuration to shared json5 preset - ([710307b](https://git.0xmax42.io/maxp/clipcode/commit/710307b936514b7527383a576edfaf702072cff6))
 
