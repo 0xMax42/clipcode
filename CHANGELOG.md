@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [unreleased]
+
+### ⚙️ Miscellaneous Tasks
+
+- *(ci)* Set gitea env vars for release asset upload - ([ca37b20](https://git.0xmax42.io/maxp/clipcode/commit/ca37b2054da8d1267f85bbd403dbe152724f4d68))
+
 ## [0.7.0](https://git.0xmax42.io/maxp/clipcode/compare/v0.6.0..v0.7.0) - 2026-02-18
 
 ### 🚀 Features
