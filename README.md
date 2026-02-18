@@ -86,6 +86,19 @@ clipcode -i secret.py -i "tests/*" ./src
 clipcode -i "*.log" --no-respect-gitignore ./src
 ```
 
+### Große Dateien kürzen oder ignorieren
+
+Mit `--truncate-lines KÜRZENAB:KÜRZENAUF` können sehr große Dateien reduziert werden.
+Standard ist `3000:500` (Dateien mit mehr als 3000 Zeilen werden auf 500 Zeilen gekürzt).
+
+```bash
+# Standardverhalten explizit
+clipcode --truncate-lines 3000:500 ./src py ts
+
+# Große Dateien komplett ignorieren
+clipcode --truncate-lines 3000:0 ./src py ts
+```
+
 ### Ergebnis (im Clipboard):
 
 ````markdown
