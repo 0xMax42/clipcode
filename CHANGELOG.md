@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### 🚀 Features
+
+- *(cli)* Add truncate lines option to control large file exports - ([ecb617a](https://git.0xmax42.io/maxp/clipcode/commit/ecb617a803bd01753b159d7fbfcda9b5b7be74b2))
+- *(exporter)* Add truncation for large files in clipboard export - ([bfb5b62](https://git.0xmax42.io/maxp/clipcode/commit/bfb5b62c0df0aaccda5bc8155d9d6707f50295ad))
+
+### 📚 Documentation
+
+- Document truncate lines option for large files in README - ([ab746b7](https://git.0xmax42.io/maxp/clipcode/commit/ab746b70945d2b3c4b97aeb2263d5e666f01a22e))
+
+### 🧪 Testing
+
+- *(cli)* Cover truncate lines options and exporter behavior - ([4ea5f57](https://git.0xmax42.io/maxp/clipcode/commit/4ea5f5725f9065ede705127394f8034ad0925d35))
+
 ### ⚙️ Miscellaneous Tasks
 
 - *(ci)* Add concurrency control for pull request workflow - ([ba9207f](https://git.0xmax42.io/maxp/clipcode/commit/ba9207fa4f943a5b01bbf614b7456ef094e4b18e))
