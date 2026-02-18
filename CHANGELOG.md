@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### ⚙️ Miscellaneous Tasks
 
+- *(ci)* Simplify release and ci workflows and remove helper scripts - ([08ca2e5](https://git.0xmax42.io/maxp/clipcode/commit/08ca2e52e2c936c2dd1fcb2e79707f98d986d1f2))
 - *(renovate)* Switch configuration to shared json5 preset - ([710307b](https://git.0xmax42.io/maxp/clipcode/commit/710307b936514b7527383a576edfaf702072cff6))
 
 ## [0.6.0](https://git.0xmax42.io/maxp/clipcode/compare/v0.5.1..v0.6.0) - 2026-01-10
