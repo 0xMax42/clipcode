@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [unreleased]
+
+### ⚙️ Miscellaneous Tasks
+
+- *(renovate)* Switch configuration to shared json5 preset - ([710307b](https://git.0xmax42.io/maxp/clipcode/commit/710307b936514b7527383a576edfaf702072cff6))
+
 ## [0.6.0](https://git.0xmax42.io/maxp/clipcode/compare/v0.5.1..v0.6.0) - 2026-01-10
 
 ### 🚀 Features
