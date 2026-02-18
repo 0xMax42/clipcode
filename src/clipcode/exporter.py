@@ -36,6 +36,8 @@ def export_files_to_clipboard(
     extensions: list[str] | None,
     respect_gitignore: bool = True,
     ignore_patterns: list[str] | None = None,
+    truncate_from: int = 3000,
+    truncate_to: int = 500,
 ):
     if extensions is None:
         # Wenn extensions None ist, alle Dateien finden
@@ -67,8 +69,22 @@ def export_files_to_clipboard(
         if _should_skip_file_for_export(file_path):
             continue
         content = read_file_content(file_path)
+        lines = content.splitlines()
+        line_count = len(lines)
+
+        if line_count > truncate_from:
+            if truncate_to == 0:
+                continue
+            content = "\n".join(lines[:truncate_to])
+
         lang = get_syntax_highlight_tag(file_path)
-        output.append(f"### {file_path}\n```{lang}\n{content}\n```\n---\n")
+        file_output = [f"### {file_path}\n```{lang}\n{content}\n```\n"]
+        if line_count > truncate_from and truncate_to > 0:
+            file_output.append(
+                f"⚠️ Datei gekürzt: {line_count} → {truncate_to} Zeilen (Grenze: > {truncate_from}).\n"
+            )
+        file_output.append("---\n")
+        output.append("".join(file_output))
 
     formatted_result = '\n'.join(output)
 
