@@ -72,6 +72,81 @@ class TestExporterIgnorePatterns(unittest.TestCase):
         # Trotz Negation soll Datei ausgeschlossen werden
         self.assertNotIn("important.py", clipboard_content)
 
+    @patch("subprocess.run")
+    def test_large_file_is_truncated_and_marked_outside_codeblock(self, mock_run):
+        """Große Dateien werden gekürzt und außerhalb des Codeblocks markiert."""
+        many_lines = "\n".join(f"line {i}" for i in range(1, 21))
+        self._create_file("large.py", many_lines)
+
+        mock_run.return_value = MagicMock()
+
+        export_files_to_clipboard(
+            root_path=str(self.temp_path),
+            extensions=None,
+            respect_gitignore=False,
+            ignore_patterns=None,
+            truncate_from=10,
+            truncate_to=5,
+        )
+
+        clipboard_content = mock_run.call_args[1]["input"].decode("utf-8")
+
+        self.assertIn("large.py", clipboard_content)
+        self.assertIn("line 1", clipboard_content)
+        self.assertIn("line 5", clipboard_content)
+        self.assertNotIn("line 6", clipboard_content)
+        self.assertIn("⚠️ Datei gekürzt: 20 → 5 Zeilen", clipboard_content)
+
+        code_end = clipboard_content.find("```\n")
+        marker_pos = clipboard_content.find("⚠️ Datei gekürzt")
+        self.assertGreater(marker_pos, code_end)
+
+    @patch("subprocess.run")
+    def test_large_file_is_ignored_when_truncate_target_is_zero(self, mock_run):
+        """Große Dateien werden ignoriert, wenn truncate_to=0 gesetzt ist."""
+        many_lines = "\n".join(f"line {i}" for i in range(1, 21))
+        self._create_file("large.py", many_lines)
+        self._create_file("small.py", "small\nfile")
+
+        mock_run.return_value = MagicMock()
+
+        export_files_to_clipboard(
+            root_path=str(self.temp_path),
+            extensions=None,
+            respect_gitignore=False,
+            ignore_patterns=None,
+            truncate_from=10,
+            truncate_to=0,
+        )
+
+        clipboard_content = mock_run.call_args[1]["input"].decode("utf-8")
+
+        self.assertIn("small.py", clipboard_content)
+        self.assertNotIn("large.py", clipboard_content)
+
+    @patch("subprocess.run")
+    def test_file_at_threshold_is_not_truncated(self, mock_run):
+        """Bei exakt truncate_from Zeilen erfolgt keine Kürzung (nur > Grenze)."""
+        ten_lines = "\n".join(f"line {i}" for i in range(1, 11))
+        self._create_file("exact.py", ten_lines)
+
+        mock_run.return_value = MagicMock()
+
+        export_files_to_clipboard(
+            root_path=str(self.temp_path),
+            extensions=None,
+            respect_gitignore=False,
+            ignore_patterns=None,
+            truncate_from=10,
+            truncate_to=5,
+        )
+
+        clipboard_content = mock_run.call_args[1]["input"].decode("utf-8")
+
+        self.assertIn("exact.py", clipboard_content)
+        self.assertIn("line 10", clipboard_content)
+        self.assertNotIn("⚠️ Datei gekürzt", clipboard_content)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -41,7 +41,7 @@ class TestCLI(unittest.TestCase):
             main()
         
         # Verify export_files_to_clipboard was called with correct arguments
-        mock_export.assert_called_once_with(str(self.temp_path), None, True, [])
+        mock_export.assert_called_once_with(str(self.temp_path), None, True, [], 3000, 500)
     
     @patch('clipcode.cli.export_files_to_clipboard')
     def test_cli_with_extensions(self, mock_export):
@@ -52,7 +52,7 @@ class TestCLI(unittest.TestCase):
             main()
         
         # Verify export_files_to_clipboard was called with extensions
-        mock_export.assert_called_once_with(str(self.temp_path), ['py', 'js', 'ts'], True, [])
+        mock_export.assert_called_once_with(str(self.temp_path), ['py', 'js', 'ts'], True, [], 3000, 500)
     
     @patch('clipcode.cli.export_files_to_clipboard')
     def test_cli_respect_gitignore_default(self, mock_export):
@@ -63,7 +63,7 @@ class TestCLI(unittest.TestCase):
             main()
         
         # Third argument should be True (respect_gitignore=True)
-        mock_export.assert_called_once_with(str(self.temp_path), None, True, [])
+        mock_export.assert_called_once_with(str(self.temp_path), None, True, [], 3000, 500)
     
     @patch('clipcode.cli.export_files_to_clipboard')
     def test_cli_explicit_respect_gitignore(self, mock_export):
@@ -73,7 +73,7 @@ class TestCLI(unittest.TestCase):
         with patch.object(sys, 'argv', test_args):
             main()
         
-        mock_export.assert_called_once_with(str(self.temp_path), None, True, [])
+        mock_export.assert_called_once_with(str(self.temp_path), None, True, [], 3000, 500)
     
     @patch('clipcode.cli.export_files_to_clipboard')
     def test_cli_no_respect_gitignore(self, mock_export):
@@ -84,7 +84,7 @@ class TestCLI(unittest.TestCase):
             main()
         
         # Third argument should be False (respect_gitignore=False)
-        mock_export.assert_called_once_with(str(self.temp_path), None, False, [])
+        mock_export.assert_called_once_with(str(self.temp_path), None, False, [], 3000, 500)
     
     @patch('clipcode.cli.export_files_to_clipboard')
     def test_cli_complex_combination(self, mock_export):
@@ -94,7 +94,7 @@ class TestCLI(unittest.TestCase):
         with patch.object(sys, 'argv', test_args):
             main()
         
-        mock_export.assert_called_once_with(str(self.temp_path), ['py', 'md'], False, [])
+        mock_export.assert_called_once_with(str(self.temp_path), ['py', 'md'], False, [], 3000, 500)
     
     def test_cli_help_message(self):
         """Test that help message includes gitignore options."""
@@ -118,8 +118,44 @@ class TestCLI(unittest.TestCase):
             main()
         
         mock_export.assert_called_once_with(
-            str(self.temp_path), None, True, ['foo.py', 'bar/baz.txt', '*.log']
+            str(self.temp_path), None, True, ['foo.py', 'bar/baz.txt', '*.log'], 3000, 500
         )
+
+    @patch('clipcode.cli.export_files_to_clipboard')
+    def test_cli_with_truncate_lines_custom(self, mock_export):
+        """Test CLI with custom --truncate-lines values."""
+        test_args = ['clipcode', '--truncate-lines', '1200:300', str(self.temp_path)]
+
+        with patch.object(sys, 'argv', test_args):
+            main()
+
+        mock_export.assert_called_once_with(str(self.temp_path), None, True, [], 1200, 300)
+
+    @patch('clipcode.cli.export_files_to_clipboard')
+    def test_cli_with_truncate_lines_ignore_mode(self, mock_export):
+        """Test CLI where truncate target is 0 (ignore large files)."""
+        test_args = ['clipcode', '--truncate-lines', '3000:0', str(self.temp_path)]
+
+        with patch.object(sys, 'argv', test_args):
+            main()
+
+        mock_export.assert_called_once_with(str(self.temp_path), None, True, [], 3000, 0)
+
+    def test_cli_with_truncate_lines_invalid_format(self):
+        """Invalid --truncate-lines format should fail fast."""
+        test_args = ['clipcode', '--truncate-lines', '3000', str(self.temp_path)]
+
+        with patch.object(sys, 'argv', test_args):
+            with self.assertRaises(SystemExit):
+                main()
+
+    def test_cli_with_truncate_lines_invalid_relation(self):
+        """truncate_to must not be greater than truncate_from."""
+        test_args = ['clipcode', '--truncate-lines', '100:200', str(self.temp_path)]
+
+        with patch.object(sys, 'argv', test_args):
+            with self.assertRaises(SystemExit):
+                main()
 
 
 class TestCLIIntegration(unittest.TestCase):
